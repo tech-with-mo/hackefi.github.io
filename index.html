@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="en" class="smooth-scroll">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP ProDesk 400 G3 DM Hackintosh EFI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+        }
+
+        .smooth-scroll {
+            scroll-behavior: smooth;
+            transition: all 1.5s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        .github-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .github-link i {
+            font-size: 1.2rem;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://9to5mac.com/wp-content/uploads/sites/6/2023/06/macOS-Sonoma-wallpaper-light.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #0071e3, #00c7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .download-button {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #0071e3, #00c7ff);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .download-button:hover {
+            transform: scale(1.05);
+        }
+
+        .features-section {
+            padding: 5rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .compatibility {
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .spec-item {
+            text-align: left;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .feature-list li {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: #00c7ff;
+            margin-right: 10px;
+        }
+
+        .guide-section {
+            padding: 5rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .guide-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .guide-container h2 {
+            color: #00c7ff;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .guide-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .footer-content {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">An EFI made for the ProDesk 400 G3!</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="https://github.com/tech-with-mo/Hackintosh-EFI-for-the-HP-Prodesk-400-G3-DM">Download</a></li>
+                <li><a href="#guide">Guide</a></li>
+                <li><a href="https://github.com/tech-with-mo" target="_blank" class="github-link"><i class="fab fa-github"></i> GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1 class="fade-in">HP ProDesk 400 G3 DM Hackintosh</h1>
+            <p class="fade-in">Optimized for Performance and Stability</p>
+            <button class="download-button" onclick="window.location.href='https://github.com/tech-with-mo/Hackintosh-EFI-for-the-HP-Prodesk-400-G3-DM'">Download EFI</button>
+        </section>
+
+        <section class="features-section" id="features">
+            <div class="spec-item fade-in">
+                <h3>HP ProDesk 400 G3 DM Optimization</h3>
+                <ul class="feature-list">
+                    <li>Custom ACPI patches specifically for HP ProDesk 400 G3 DM</li>
+                    <li>Optimized power management</li>
+                    <li>Pre-mapped USB ports for this specific model</li>
+                    <li>Tested and verified on HP ProDesk 400 G3 DM hardware</li>
+                    <li>Regular updates to maintain compatibility</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="compatibility" id="compatibility">
+            <div class="specs-grid">
+                <div class="spec-item fade-in">
+                    <h3>Tested Hardware</h3>
+                    <ul class="feature-list">
+                        <li>CPU: 3.4 GHz Dual-Core Intel Core i5</li>
+                        <li>RAM: 8GB DDR4 2400 MHz</li>
+                        <li>Storage: 256GB Intenso 2.5" SATA SSD</li>
+                        <li>Mac Identifier: iMac18,1 (19,1 compatible)</li>
+                    </ul>
+                </div>
+                <div class="spec-item fade-in">
+                    <h3>Working Features</h3>
+                    <ul class="feature-list">
+                        <li>macOS Sonoma Support</li>
+                        <li>Hardware Acceleration</li>
+                        <li>Sleep/Wake</li>
+                        <li>USB Ports Mapped</li>
+                        <li>iServices (Requires generating your own SMBIOS)</li>
+                        <li>Wi-Fi & Bluetooth</li>
+                    </ul>
+                </div>
+                <div class="spec-item fade-in">
+                    <h3>EFI Contents</h3>
+                    <ul class="feature-list">
+                        <li>OpenCore Latest (Updated with new releases)</li>
+                        <li>Custom ACPI Patches</li>
+                        <li>Optimized Kexts</li>
+                        <li>Config.plist</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section" id="guide">
+            <div class="guide-container fade-in">
+                <h2>Installation Guide</h2>
+                <div class="guide-content">
+                    <p>How do you use this EFI? You probably know but I´ll explain it anyway.</p>
+                    
+                    <p>Plug your USB in that contains your EFI Partition. If you want to Paste this Directly on your SSD (which I advise you against) remember to make a Backup.</p>
+                    
+                    <p>Next up Mount the EFI Partition with a Handy tool called ESP Mounter Pro.</p>
+                    
+                    <p>Identify your EFI and click "Mount".</p>
+                    
+                    <p>Open Finder and navigate to the Volume called EFI. Copy your current EFI and Paste it somewhere else. Go back and Delete the EFI. Grab my EFI from my GitHub and double click it. macOS will automatically extract the zip. Grab the EFI Folder and Cut it from there to your EFI Volume. You shouldn't move it because something might go wrong during the process so cutting is safer.</p>
+                    
+                    <p>Once that's done unmount using ESP Mounter Pro. Shutdown your Hack. Reboot of the USB and if it boots repeat the same Process as before but copy the EFI from your USB to your Main Drive. That's it!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>For educational purposes only. Not affiliated with Apple Inc. All trademarks belong to their respective owners.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    duration: 2000
+                });
+            });
+        });
+    </script>
+</body>
+</html>
